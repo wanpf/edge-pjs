@@ -20,7 +20,7 @@ pipy()
       metrics = metricsCache.get(__cluster?.name),
     ) => (
       headers && (
-        headers['osm-stats'] = identity,
+        headers['fsm-stats'] = identity,
         metrics.upstreamResponseTotal.increase(),
         metrics.upstreamResponseCode.withLabels(msg?.head?.status / 100).increase()
       )

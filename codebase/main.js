@@ -39,7 +39,7 @@
 .use('stats.js', 'prometheus')
 
 .listen(':::15000')
-.use('stats.js', 'osm-stats')
+.use('stats.js', 'fsm-stats')
 
 //
 // Local DNS server

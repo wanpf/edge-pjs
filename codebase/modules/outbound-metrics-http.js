@@ -27,11 +27,11 @@ pipy({
       status = msg?.head?.status,
       statusClass = status / 100,
       metrics = metricsCache.get(clusterName),
-      osmRequestDurationHist = identityCache.get(msg?.head?.headers?.['osm-stats']),
+      fsmRequestDurationHist = identityCache.get(msg?.head?.headers?.['fsm-stats']),
     ) => (
-      osmRequestDurationHist && (
-        osmRequestDurationHist.observe(Date.now() - _requestTime),
-        delete msg.head.headers['osm-stats']
+      fsmRequestDurationHist && (
+        fsmRequestDurationHist.observe(Date.now() - _requestTime),
+        delete msg.head.headers['fsm-stats']
       ),
       metrics.upstreamCompletedCount.increase(),
       metrics.upstreamResponseTotal.increase(),
