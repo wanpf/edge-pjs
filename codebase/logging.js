@@ -40,22 +40,22 @@
         !headers['x-request-id'] && (
           headers['x-request-id'] = uuid
         ),
-        headers['fsm-stats-namespace'] = namespace,
-        headers['fsm-stats-kind'] = kind,
-        headers['fsm-stats-name'] = name,
-        headers['fsm-stats-pod'] = pod
+        headers['osm-stats-namespace'] = namespace,
+        headers['osm-stats-kind'] = kind,
+        headers['osm-stats-name'] = name,
+        headers['osm-stats-pod'] = pod
       )
     )(),
   ) => (
     {
       loggingEnabled: Boolean(logLogging),
 
-      makeLoggingData: (msg, remoteAddr, remotePort, localAddr, localPort) => (
+      makeLoggingData: (msg, remoteAddr, remotePort, localAddr, localPort, isOutbound) => (
         (
           sampled = false,
         ) => (
           msg?.head?.headers && (
-            !msg.head.headers['x-b3-traceid'] && (
+            (isOutbound || !msg.head.headers['x-b3-traceid']) && (
               initTracingHeaders(msg.head.headers)
             ),
             sampled = (!tracingLimitedID || toInt63(msg.head.headers['x-b3-traceid']) < tracingLimitedID)

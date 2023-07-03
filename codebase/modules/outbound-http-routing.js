@@ -85,31 +85,15 @@
       ),
 
       hostHandlers = new algo.Cache(
-        (host) => (
-          (
-            vh = portConfig?.HttpHostPort2Service?.[host],
-            newHost,
-          ) => (
-            !vh && config?.Spec?.FeatureFlags?.EnableHostIPDefaultRoute && (
-              newHost = vh = portConfig?.HttpHostPort2Service?.[Object.keys(portConfig.HttpHostPort2Service)[0]]
-            ),
-            { handler: serviceHandlers.get(vh), newHost }
-          )
-        )()
+        (host) => serviceHandlers.get(portConfig?.HttpHostPort2Service?.[host])
       ),
     ) => (
       (msg) => (
         (
           head = msg.head,
           headers = head.headers,
-          svcStruct = hostHandlers.get(headers.host),
         ) => (
-          svcStruct.handler && (
-            svcStruct.newHost && (
-              headers.host = svcStruct.newHost
-            ),
-            svcStruct.handler(head.method, head.path, headers)
-          )
+          hostHandlers.get(headers.host)(head.method, head.path, headers)
         )
       )()
     )

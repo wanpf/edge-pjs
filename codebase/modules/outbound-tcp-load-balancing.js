@@ -27,7 +27,7 @@
       __isEgress = true
     ),
     !__cert && __cluster?.SourceCert && (
-      __cluster.SourceCert.FsmIssued && (
+      __cluster.SourceCert.OsmIssued && (
         __cert = {CertChain: certChain, PrivateKey: privateKey}
       ) || (
         __cert = __cluster.SourceCert

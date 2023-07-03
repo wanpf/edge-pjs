@@ -20,9 +20,9 @@ pipy({
 )
 
 //
-// fsm proxy get stats
+// osm proxy get stats
 //
-.pipeline('fsm-stats')
+.pipeline('osm-stats')
 .demuxHTTP().to($ => $
   .handleMessageStart(
     msg => (

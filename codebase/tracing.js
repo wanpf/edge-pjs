@@ -50,10 +50,10 @@
           !headers['x-request-id'] && (
             headers['x-request-id'] = uuid
           ),
-          headers['fsm-stats-namespace'] = namespace,
-          headers['fsm-stats-kind'] = kind,
-          headers['fsm-stats-name'] = name,
-          headers['fsm-stats-pod'] = pod,
+          headers['osm-stats-namespace'] = namespace,
+          headers['osm-stats-kind'] = kind,
+          headers['osm-stats-name'] = name,
+          headers['osm-stats-pod'] = pod,
           sampled
         )
       )(),

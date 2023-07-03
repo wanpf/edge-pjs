@@ -71,7 +71,7 @@
       'sidecar_response_code_class'
     ]),
 
-    fsmRequestDurationHist = new stats.Histogram('fsm_request_duration_ms', [
+    osmRequestDurationHist = new stats.Histogram('osm_request_duration_ms', [
       5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 30000, 60000, 300000, 600000, 1800000, 3600000, Infinity
     ], [
       'source_namespace',
@@ -109,7 +109,7 @@
       (
         items = identity?.split?.(','),
       ) => (
-        items?.length === 4 ? fsmRequestDurationHist.withLabels(namespace, kind, name, pod, items[0], items[1], items[2], items[3]) : null
+        items?.length === 4 ? osmRequestDurationHist.withLabels(namespace, kind, name, pod, items[0], items[1], items[2], items[3]) : null
       )
     )()),
 

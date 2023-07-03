@@ -15,7 +15,7 @@
           ranges: config.DestinationIPRanges && Object.entries(config.DestinationIPRanges).map(
             ([k, config]) => ({
               mask: new Netmask(k),
-              cert: config?.SourceCert?.FsmIssued && certChain && privateKey ? ({
+              cert: config?.SourceCert?.OsmIssued && certChain && privateKey ? ({
                 CertChain: certChain,
                 PrivateKey: privateKey,
                 IssuingCA: issuingCA,
